@@ -1,1 +1,58 @@
-<p>register works!</p>
+<div class="container">
+
+  <form [formGroup]="registerForm" class="login-form" (ngSubmit)="onSubmit()">
+    <div class="login-wrap">
+      <p class="login-img"><i class="icon_lock_alt"></i></p>
+      <div class="input-group">
+        <span class="input-group-addon"><i class="icon_profile"></i></span>
+        <input type="text" formControlName="firstname" class="form-control" placeholder="Firstname" autofocus required>
+        <span class="text-danger"
+          *ngIf="(registerFormControl.firstname.touched || submitted) && registerFormControl.firstname.errors?.required">Required</span>
+        <span class="text-danger"
+          *ngIf="(registerFormControl.firstname.touched || submitted) && registerFormControl.firstname.errors?.pattern">
+          Plz enter a text</span>
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon"><i class="icon_profile"></i></span>
+        <input type="text" formControlName="lastname" class="form-control" placeholder="Lastname" autofocus required>
+        <span class="text-danger"
+          *ngIf="(registerFormControl.lastname.touched || submitted) && registerFormControl.lastname.errors?.required">Required</span>
+        <span class="text-danger"
+          *ngIf="(registerFormControl.lastname.touched || submitted) && registerFormControl.lastname.errors?.pattern">
+          Plz enter a string Object</span>
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon"><i class="icon_profile"></i></span>
+        <input type="email" formControlName="email" class="form-control" placeholder="email" autofocus required>
+        <span class="text-danger"
+          *ngIf="(registerFormControl.email.touched || submitted) && registerFormControl.email.errors?.required">Required</span>
+        <span class="text-danger"
+          *ngIf="(registerFormControl.email.touched || submitted) && registerFormControl.email.errors?.email">
+          Plz enter a valid email</span>
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon"><i class="icon_profile"></i></span>
+        <input type="password" formControlName="password" class="form-control" placeholder="passwod" autofocus required>
+        <span class="text-danger"
+          *ngIf="(registerFormControl.password.touched || submitted )&& registerFormControl.password.errors?.required">Password
+          is required</span>
+        <span class="text-danger"
+          *ngIf="(registerFormControl.password.touched || submitted) && registerFormControl.password.errors?.invalidPassword">
+          Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercas letter and 1 number</span>
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon"><i class="icon_profile"></i></span>
+        <input type="password" formControlName="confirmPass" class="form-control" placeholder="passwod" autofocus
+          required>
+        <span class="text-danger"
+          *ngIf="(registerFormControl.confirmPass.touched || submitted) && registerFormControl.confirmPass.errors?.required">Confirm
+          Password is required</span>
+        <span class="text-danger"
+          *ngIf="(registerFormControl.confirmPass.touched || submitted) && registerFormControl.confirmPass.errors?.passwordMismatch">
+          Passwords doesnot match</span>
+      </div>
+      <button class="btn btn-primary btn-lg btn-block" type="submit" >register</button>
+    </div>
+  </form>
+
+</div>
