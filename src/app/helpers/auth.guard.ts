@@ -6,16 +6,17 @@ export class AuthGuard implements CanActivate {
 
     constructor(
         private router: Router
-    ) {}
+    ) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         let token = localStorage.getItem('token')
-
-        if(token != undefined){
+        let expTime = new Date(localStorage.getItem('expTime'));
+        let currentDte = new Date();
+        if (token != undefined && expTime >= currentDte) {
             return true
         }
-        this.router.navigate(['login']);
-        return false;
+        this.router.navigate(['/authentification/login']);
+
     }
 }
 

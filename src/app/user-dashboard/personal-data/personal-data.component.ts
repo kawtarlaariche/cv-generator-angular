@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-personal-data',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./personal-data.component.scss']
 })
 export class PersonalDataComponent implements OnInit {
-
+  PersonalDataForm: FormGroup;
+  submitted = false;
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  onSubmit(){
+    
+  }
 }

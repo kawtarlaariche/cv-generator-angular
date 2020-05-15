@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { environment } from '@env/environment';
 import { throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -12,8 +12,10 @@ const apiUrl = environment.baseApi + '/user';
   providedIn: 'root'
 })
 export class AuthenticationService {
-
+  
   constructor(private http: HttpClient) { }
+
+  test: any;
 
   login(user: User) {
     return this.http.post(apiUrl + '/login',
@@ -24,7 +26,9 @@ export class AuthenticationService {
       .pipe(
         map(res => {
           let token = res['token'];
+           let expTime =res['EXPIRY_TIME'];
           localStorage.setItem('token', token);
+          localStorage.setItem('expTime',expTime);
         }),
         catchError(this.errorHandler)
       )
@@ -40,6 +44,17 @@ export class AuthenticationService {
       })
       .pipe(catchError(this.errorHandler));
   }
+
+  getUser(email: string){
+   return this.http.post(apiUrl + '/user',{
+     email:email
+   })
+   .subscribe(
+     res => {this.test = res},
+     err => {}
+   )
+  }
+
   errorHandler(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // client-side error
@@ -48,5 +63,7 @@ export class AuthenticationService {
     }
     return throwError(error);
   }
+
+
 
 }

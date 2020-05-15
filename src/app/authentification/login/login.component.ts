@@ -3,6 +3,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { AuthenticationService } from '@app/services';
 import { CustomValidationService } from '@app/services';
 import { Router } from '@angular/router';
+import { UserDashboardComponent } from '@app/user-dashboard/user-dashboard.component';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
     private customValidator: CustomValidationService,
     private router: Router) {
 
-      console.log(this.error)
+    console.log(this.error)
+
 
   }
 
@@ -34,10 +36,10 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.compose([Validators.required, this.customValidator.patternValidator()])],
-
     },
-
     )
+
+    this.loginForm.setValue(this.getTestCredentials())
   }
   onSubmit() {
     this.submitted = true;
@@ -55,4 +57,17 @@ export class LoginComponent implements OnInit {
 
   }
 
+  getTestCredentials() {
+    return { email: "kawtar94@gmail.com", password: "La123456" }
+  }
+
+  redirectToLogin(){
+    this.router.navigate(['/authentification/register']);
+  }
+
+  getUser(){
+    
+  }
 }
+
+

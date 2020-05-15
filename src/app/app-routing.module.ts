@@ -5,7 +5,7 @@ import { AuthGuard } from '@app/helpers';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'authentification', pathMatch: 'prefix'},
+  { path: '', redirectTo: 'user-dashboard', pathMatch: 'prefix'},
   { 
     path: 'authentification',
     loadChildren: () => import('./authentification/authentification.module').then(m => m.AuthentificationModule)

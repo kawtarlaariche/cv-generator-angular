@@ -51,6 +51,14 @@
           *ngIf="(registerFormControl.confirmPass.touched || submitted) && registerFormControl.confirmPass.errors?.passwordMismatch">
           Passwords doesnot match</span>
       </div>
+       <!-- Alert -->
+       <div *ngIf="error" class="alert alert-block alert-danger fade in">
+        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+        <strong>Oh snap!</strong> {{error}}.
+      </div>
+      <!-- /Alert -->
       <button class="btn btn-primary btn-lg btn-block" type="submit" >register</button>
     </div>
   </form>

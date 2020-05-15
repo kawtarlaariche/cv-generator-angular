@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
+  error: string;
   constructor(private auth: AuthenticationService,
     private fb: FormBuilder,
     private customValidator: CustomValidationService,
@@ -46,9 +47,9 @@ export class RegisterComponent implements OnInit {
       this.auth.register(this.registerForm.value).subscribe(
         res => {
           console.log(res)
-          this.router.navigate(['login'])
+          this.router.navigate(['/authentification/login'])
         },
-        err => console.log(err)
+        err => { this.error = err.error.msg;}
       )
     }
 
