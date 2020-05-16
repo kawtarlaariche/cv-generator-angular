@@ -12,7 +12,7 @@ const apiUrl = environment.baseApi + '/user';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  
+
   constructor(private http: HttpClient) { }
 
   test: any;
@@ -26,9 +26,12 @@ export class AuthenticationService {
       .pipe(
         map(res => {
           let token = res['token'];
-           let expTime =res['EXPIRY_TIME'];
+          let expTime = res['EXPIRY_TIME'];
+
           localStorage.setItem('token', token);
-          localStorage.setItem('expTime',expTime);
+          localStorage.setItem('expTime', expTime);
+          localStorage.setItem('user', JSON.stringify(res['user']));
+         
         }),
         catchError(this.errorHandler)
       )
@@ -43,16 +46,6 @@ export class AuthenticationService {
         password: user.password
       })
       .pipe(catchError(this.errorHandler));
-  }
-
-  getUser(email: string){
-   return this.http.post(apiUrl + '/user',{
-     email:email
-   })
-   .subscribe(
-     res => {this.test = res},
-     err => {}
-   )
   }
 
   errorHandler(error: HttpErrorResponse) {

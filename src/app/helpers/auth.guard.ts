@@ -13,9 +13,12 @@ export class AuthGuard implements CanActivate {
         let expTime = new Date(localStorage.getItem('expTime'));
         let currentDte = new Date();
         if (token != undefined && expTime >= currentDte) {
+            console.log('you have been logged')
             return true
         }
-        this.router.navigate(['/authentification/login']);
+        
+            console.log('you have to login')
+            this.router.navigate(['/authentification/login']);
 
     }
 }

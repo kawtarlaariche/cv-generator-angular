@@ -58,16 +58,14 @@ export class LoginComponent implements OnInit {
   }
 
   getTestCredentials() {
-    return { email: "kawtar94@gmail.com", password: "La123456" }
+    return { email: "kaw94@gmail.com", password: "La123456" }
   }
 
   redirectToLogin(){
     this.router.navigate(['/authentification/register']);
   }
 
-  getUser(){
-    
-  }
+  
 }
 
 
