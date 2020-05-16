@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { UserDashboardService } from '@app/services/user-dashboard.service';
+import { Router } from '@angular/router';
+import { User } from '@app/models';
 
 @Component({
   selector: 'app-personal-data',
@@ -8,15 +11,16 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class PersonalDataComponent implements OnInit {
   submitted = false;
- user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : undefined;
- 
+  error;
+  user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : undefined;
+  
   PersonalDataForm = new FormGroup({
     firstname: new FormControl(),
     lastname: new FormControl(),
     email: new FormControl(),
-    adress: new FormControl(),
+    address: new FormControl(),
     nationality: new FormControl(),
-    mobile: new FormControl(),
+    phone: new FormControl(),
     placeOfBirth: new FormControl(),
     dateOfBirth: new FormControl(),
     profile: new FormControl(),
@@ -24,11 +28,11 @@ export class PersonalDataComponent implements OnInit {
   getData() {
     return {
       firstname: this.user.firstname,
-      lastname:  this.user.lastname,
+      lastname: this.user.lastname,
       email: this.user.email,
-      adress: null,
+      address: null,
       nationality: null,
-      mobile: null,
+      phone: null,
       placeOfBirth: null,
       dateOfBirth: null,
       profile: null,
@@ -37,12 +41,19 @@ export class PersonalDataComponent implements OnInit {
   get DataFormControl() {
     return this.PersonalDataForm.controls;
   }
-  constructor() { }
+  constructor(
+              private dash: UserDashboardService,
+              private router: Router
+              ) { }
 
   ngOnInit(): void {
-  this.PersonalDataForm.setValue(this.getData())
+    this.PersonalDataForm.setValue(this.getData())
   }
   onSubmit() {
-
+     console.log(this.user.id)
+    this.dash.updateUser(this.user.id,this.PersonalDataForm.value).subscribe(
+      res=> {console.log(res)},
+      err=> {this.error = err.error.msg}
+    )
   }
 }
