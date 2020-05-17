@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { environment } from '@env/environment';
 import { throwError, Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { User } from '@app/models';
+import { User, Education, Experience, Project, Language, Hobby } from '@app/models';
 
 
 const apiUrl = environment.baseApi;
@@ -25,8 +25,27 @@ export class UserDashboardService {
     return this.http.put(apiUrl + '/user/' +id, user,httpOptions).pipe(
       catchError(this.errorHandler));
   }
-
-
+  
+ createEducation(education:Education){
+   return this.http.post(apiUrl+'/education',education,httpOptions).pipe(
+    catchError(this.errorHandler));
+ }
+ createExperience(experience:Experience){
+  return this.http.post(apiUrl+'/experience',experience,httpOptions).pipe(
+   catchError(this.errorHandler));
+}
+createProject(project:Project){
+  return this.http.post(apiUrl+'/project',project,httpOptions).pipe(
+   catchError(this.errorHandler));
+}
+createLanguage(language:Language){
+  return this.http.post(apiUrl+'/language',language,httpOptions).pipe(
+   catchError(this.errorHandler));
+}
+createHobby(hobby:Hobby){
+  return this.http.post(apiUrl+'/hobby',hobby,httpOptions).pipe(
+   catchError(this.errorHandler));
+}
 
   errorHandler(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

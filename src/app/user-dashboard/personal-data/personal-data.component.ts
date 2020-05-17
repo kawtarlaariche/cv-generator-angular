@@ -10,7 +10,6 @@ import { User } from '@app/models';
   styleUrls: ['./personal-data.component.scss']
 })
 export class PersonalDataComponent implements OnInit {
-  submitted = false;
   error;
   user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : undefined;
   
@@ -56,4 +55,8 @@ export class PersonalDataComponent implements OnInit {
       err=> {this.error = err.error.msg}
     )
   }
+  redirect(){
+    this.router.navigate(['/user-dashboard/education']);
+  }
+
 }
