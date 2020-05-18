@@ -10,10 +10,12 @@ import { HobbyComponent } from './hobby/hobby.component';
 import { LanguageComponent } from './language/language.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { TemplateComponent } from './template/template.component';
+import { Cv1Component } from './cv1/cv1.component';
 
 
 @NgModule({
-  declarations: [UserDashboardComponent, PersonalDataComponent, EducationComponent, ExperienceComponent, ProjectComponent, HobbyComponent, LanguageComponent],
+  declarations: [UserDashboardComponent, PersonalDataComponent, EducationComponent, ExperienceComponent, ProjectComponent, HobbyComponent, LanguageComponent, TemplateComponent, Cv1Component],
   imports: [
     CommonModule,
     UserDashboardRoutingModule,  

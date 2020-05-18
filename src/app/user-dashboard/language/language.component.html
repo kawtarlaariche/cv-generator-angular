@@ -8,7 +8,7 @@
                 Language Skill
               </header>
               <div class="panel-body">
-                <form class="form-horizontal" [formGroup]="LanguageForm" (ngSubmit)="onSubmit()" role="form">
+                <form class="form-horizontal" [formGroup]="LanguageForm"  role="form">
                   <h1>add Language</h1>
                   <div formArrayName="languages" *ngFor="let creds of languages.controls; let i = index">
                     <ng-container [formGroupName]="i">
@@ -32,8 +32,8 @@
                       <div class="form-group" style="margin-bottom: 20px;margin-top: 20px;">
                         <div class="col-lg-offset-2 col-lg-10">
                           <button class="btn btn-primary" (click)="reset(i)" type="button">reset</button>
-                          <button type="submit" class="btn btn-primary" style="margin-right:20px;margin-left: 20px;">submit</button>
-                          <button class="btn btn-primary"  style="margin-right:20px" (click)="addLanguage(i)" type="button">save</button>
+                          <!--<button type="submit" class="btn btn-primary" style="margin-right:20px;margin-left: 20px;">submit</button>-->
+                          <button class="btn btn-primary"  style="margin-right:20px;margin-left: 20px;" (click)="addLanguage(i)" type="button">save</button>
                           <button class="btn btn-primary" (click)="delete(i)" type="button">delete</button>
                         </div>
                       </div>

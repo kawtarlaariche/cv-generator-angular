@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-dashboard.component.scss']
 })
 export class UserDashboardComponent implements OnInit {
+  user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : undefined;
+  firstname = this.user.firstname;
+  lastname = this.user.lastname;
 
   constructor() { }
 

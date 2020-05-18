@@ -14,15 +14,13 @@ export class HobbyComponent implements OnInit {
   error;
   hobby:Hobby
   user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : undefined;
-  HobbyForm = new FormGroup({
-    description: new FormControl()
-  });
+  HobbyForm : FormGroup
   constructor(
     private fb: FormBuilder,
     private dash: UserDashboardService,
     private router: Router) {
     this.HobbyForm = this.fb.group({
-      credentials: this.fb.array([]),
+      hobbies: this.fb.array([]),
     });
   }
 
@@ -39,17 +37,27 @@ export class HobbyComponent implements OnInit {
       err=> {this.error = err.error.msg})
 
   }
+  get hobbies():FormArray{
+    return this.HobbyForm.get('hobbies') as FormArray;
+  }
+  addHobby(i:number){
+    this.hobby = {
+      description: this.hobbies.value[i].description,
+      users_id: this.user.id}
+    console.log(this.hobbies.value[i]);
+     this.dash.createHobby(this.hobby).subscribe(
+      res=> {console.log(res)},
+      err=> {this.error = err.error.msg})
+   }
+  
   delete(i) {
-    const creds = this.HobbyForm.controls.credentials as FormArray;
-    creds.removeAt(i) 
+    this.hobbies.removeAt(i) 
   }
   reset(i){
-    const creds = this.HobbyForm.controls.credentials as FormArray;
-    creds.reset(i)
+    this.hobbies.reset(i)
   }
   addCreds() {
-    const creds = this.HobbyForm.controls.credentials as FormArray;
-    creds.push(this.fb.group({
+    this.hobbies.push(this.fb.group({
       description: '',
       
     }));

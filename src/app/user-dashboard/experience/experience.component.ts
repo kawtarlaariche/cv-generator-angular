@@ -14,17 +14,13 @@ export class ExperienceComponent implements OnInit {
   error;
   experience:Experience
   user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : undefined;
-  ExperienceForm = new FormGroup({
-    dateDebut: new FormControl(),
-    dateFin: new FormControl(),
-    description: new FormControl()
-  });
+  ExperienceForm:FormGroup
   constructor(
     private fb: FormBuilder,
     private dash: UserDashboardService,
     private router: Router) {
     this.ExperienceForm = this.fb.group({
-      credentials: this.fb.array([]),
+      experiences: this.fb.array([]),
     });
   }
 
@@ -43,17 +39,28 @@ export class ExperienceComponent implements OnInit {
       err=> {this.error = err.error.msg})
 
   }
+  get experiences():FormArray{
+    return this.ExperienceForm.get('experiences') as FormArray
+  }
+  addExperience(i: number) {
+    this.experience= {
+      dateDebut: this.experiences.value[i].dateDebut,
+      dateFin: this.experiences.value[i].dateFin,
+      description:this.experiences.value[i].description,
+      users_id: this.user.id}
+      console.log(this.experiences.value[i]);
+    this.dash.createExperience(this.experience).subscribe(
+      res => { console.log(res) },
+      err => { this.error = err.error.msg })
+    }
   delete(i) {
-    const creds = this.ExperienceForm.controls.credentials as FormArray;
-    creds.removeAt(i) 
+    this.experiences.removeAt(i) 
   }
   reset(i){
-    const creds = this.ExperienceForm.controls.credentials as FormArray;
-    creds.reset(i)
+    this.experiences.reset(i)
   }
   addCreds() {
-    const creds = this.ExperienceForm.controls.credentials as FormArray;
-    creds.push(this.fb.group({
+    this.experiences.push(this.fb.group({
       dateDebut: '',
       dateFin: '',
       description:''

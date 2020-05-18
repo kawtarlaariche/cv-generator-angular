@@ -8,10 +8,9 @@
               Experience 
             </header>
             <div class="panel-body">
-              <form class="form-horizontal" [formGroup]="ExperienceForm" (ngSubmit)="onSubmit()" role="form">
+              <form class="form-horizontal" [formGroup]="ExperienceForm"  role="form">
                 <h1>add Experience</h1>
-                <button class="btn btn-primary" (click)="addCreds()">Add</button>
-                <div formArrayName="credentials" *ngFor="let creds of ExperienceForm.controls.credentials?.value; let i = index">
+                <div formArrayName="experiences" *ngFor="let creds of experiences.controls; let i = index">
                   <ng-container [formGroupName]="i">
                     <div class="form-group">
                       <label  class="col-lg-2 control-label">Date Debut</label>
@@ -34,13 +33,17 @@
                     <div class="form-group" style="margin-bottom: 20px;margin-top: 20px;">
                       <div class="col-lg-offset-2 col-lg-10">
                         <button class="btn btn-primary" (click)="reset(i)" type="button">reset</button>
-                        <button type="submit" class="btn btn-primary" style="margin-right:20px;margin-left: 20px;">save</button>
+                      <!--<button type="submit" class="btn btn-primary" style="margin-right:20px;margin-left: 20px;">save</button>-->
+                      <button class="btn btn-primary"  style="margin-right:20px;margin-left: 20px;" (click)="addExperience(i)" type="button">save</button>
                         <button class="btn btn-primary" (click)="delete(i)" type="button">delete</button>
                       </div>
                     </div>
                   </ng-container>
                 </div>             
               </form>
+              <p>
+                <button class="btn btn-primary" (click)="addCreds()">Add</button>
+            </p>
             </div>
           </section>
         </div>

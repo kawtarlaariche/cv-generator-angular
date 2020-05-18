@@ -14,17 +14,13 @@ export class ProjectComponent implements OnInit {
   error;
   project:Project
   user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : undefined;
-  ProjectForm = new FormGroup({
-    dateDebut: new FormControl(),
-    dateFin: new FormControl(),
-    description: new FormControl()
-  });
+  ProjectForm :FormGroup
   constructor(
     private fb: FormBuilder,
     private dash: UserDashboardService,
     private router: Router) {
     this.ProjectForm = this.fb.group({
-      credentials: this.fb.array([]),
+      projects: this.fb.array([]),
     });
   }
 
@@ -43,17 +39,29 @@ export class ProjectComponent implements OnInit {
       err=> {this.error = err.error.msg})
 
   }
+  addProject(i: number) {
+    this.project = {
+      dateDebut: this.projects.value[i].dateDebut,
+      dateFin: this.projects.value[i].dateFin,
+      description:this.projects.value[i].description,
+      users_id: this.user.id
+    }
+    console.log(this.projects.value[i]);
+    this.dash.createProject(this.project).subscribe(
+      res => { console.log(res) },
+      err => { this.error = err.error.msg })
+  }
+  get projects():FormArray{
+    return this.ProjectForm.get('projects') as FormArray
+  }
   delete(i) {
-    const creds = this.ProjectForm.controls.credentials as FormArray;
-    creds.removeAt(i) 
+    this.projects.removeAt(i) 
   }
   reset(i){
-    const creds = this.ProjectForm.controls.credentials as FormArray;
-    creds.reset(i)
+    this.projects.reset(i)
   }
   addCreds() {
-    const creds = this.ProjectForm.controls.credentials as FormArray;
-    creds.push(this.fb.group({
+    this.projects.push(this.fb.group({
       dateDebut: '',
       dateFin: '',
       description:''
