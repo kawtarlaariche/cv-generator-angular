@@ -4,9 +4,16 @@ export interface User {
     lastname: string,
     email: string,
     password: string,
-    address:string,
     phone: string,
-    placeBirth:string,
     birth:Date,
+    placeBirth:string,  
     nationality:string,
+    address:string,
+    image:Blob,
+    linkedin:string,
+    facebook:string,
+    website:string,
+    profile:string
+
+
 }

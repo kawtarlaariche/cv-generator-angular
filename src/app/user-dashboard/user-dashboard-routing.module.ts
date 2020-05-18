@@ -8,6 +8,7 @@ import { ExperienceComponent } from './experience/experience.component';
 import { ProjectComponent } from './project/project.component';
 import { HobbyComponent } from './hobby/hobby.component';
 import { LanguageComponent } from './language/language.component';
+import { TemplateComponent } from './template/template.component';
 
 const routes: Routes = [{
   path: '', component: UserDashboardComponent,
@@ -17,7 +18,8 @@ const routes: Routes = [{
     {path: 'experience', component:ExperienceComponent},
     {path:'project', component:ProjectComponent},
     {path:'language',component:LanguageComponent},
-    {path:'hobby', component:HobbyComponent}
+    {path:'hobby', component:HobbyComponent},
+    {path:'template', component:TemplateComponent}
   ]
 }
 ];

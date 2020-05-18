@@ -12,10 +12,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TemplateComponent } from './template/template.component';
 import { Cv1Component } from './cv1/cv1.component';
+import { Cv2Component } from './cv2/cv2.component';
 
 
 @NgModule({
-  declarations: [UserDashboardComponent, PersonalDataComponent, EducationComponent, ExperienceComponent, ProjectComponent, HobbyComponent, LanguageComponent, TemplateComponent, Cv1Component],
+  declarations: [UserDashboardComponent, PersonalDataComponent, EducationComponent, ExperienceComponent, ProjectComponent, HobbyComponent, LanguageComponent, TemplateComponent, Cv1Component, Cv2Component],
   imports: [
     CommonModule,
     UserDashboardRoutingModule,  
