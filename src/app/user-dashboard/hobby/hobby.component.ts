@@ -26,17 +26,7 @@ export class HobbyComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  onSubmit() {
-    const creds = this.HobbyForm.controls.credentials as FormArray;
-    this.hobby={ 
-      description:creds.value[0].description,
-      users_id:this.user.id}
-      console.log(this.hobby)
-      this.dash.createHobby(this.hobby).subscribe(
-      res=> {console.log(res)},
-      err=> {this.error = err.error.msg})
-
-  }
+  
   get hobbies():FormArray{
     return this.HobbyForm.get('hobbies') as FormArray;
   }
@@ -44,7 +34,9 @@ export class HobbyComponent implements OnInit {
     this.hobby = {
       description: this.hobbies.value[i].description,
       users_id: this.user.id}
-    console.log(this.hobbies.value[i]);
+      console.log(this.user.id)
+      console.log(this.hobby)
+  
      this.dash.createHobby(this.hobby).subscribe(
       res=> {console.log(res)},
       err=> {this.error = err.error.msg})

@@ -25,20 +25,7 @@ export class EducationComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  onSubmit() {
-    const creds = this.EducationForm.controls.credentials as FormArray;
-    this.education = {
-      dateDebut: creds.value[0].dateDebut,
-      dateFin: creds.value[0].dateFin,
-      description: creds.value[0].description,
-      users_id: this.user.id
-    }
-    console.log(this.education)
-    this.dash.createEducation(this.education).subscribe(
-      res => { console.log(res) },
-      err => { this.error = err.error.msg })
-
-  }
+  
   get educations(): FormArray {
     return this.EducationForm.get("educations") as FormArray;
   }
@@ -52,6 +39,7 @@ export class EducationComponent implements OnInit {
     this.education = {
       dateDebut: this.educations.value[i].dateDebut,
       dateFin: this.educations.value[i].dateFin,
+      university:this.educations.value[i].university,
       description:this.educations.value[i].description,
       users_id: this.user.id
     }
@@ -64,6 +52,7 @@ export class EducationComponent implements OnInit {
     this.educations.push(this.fb.group({
       dateDebut: '',
       dateFin: '',
+      university:'',
       description: ''
     }));
   }

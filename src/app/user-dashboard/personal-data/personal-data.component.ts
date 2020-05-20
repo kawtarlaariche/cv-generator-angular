@@ -17,6 +17,7 @@ export class PersonalDataComponent implements OnInit {
     firstname: new FormControl(),
     lastname: new FormControl(),
     email: new FormControl(),
+    title:  new FormControl(),
     address: new FormControl(),
     nationality: new FormControl(),
     phone: new FormControl(),
@@ -35,6 +36,7 @@ export class PersonalDataComponent implements OnInit {
       placeOfBirth: null,
       dateOfBirth: null,
       profile: null,
+      title:null,
     }
   }
   get DataFormControl() {

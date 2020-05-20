@@ -34,26 +34,6 @@ export class LanguageComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  onSubmit() {
-  
-  /*  for (let i = 0; i < this.languages.length; i++) {
-    let  element = this.languages.value[i];
-    this.language = {
-      name: this.languages.value[i].name,
-      level: this.languages.value[i].level,
-      users_id: this.user.id
-    }}*/
-    this.language = {
-      name: this.LanguageForm.value.name,
-      level: this.LanguageForm.value.level,
-      users_id: this.user.id}
-    console.log(this.LanguageForm)
-    console.log(this.LanguageForm.value)
-     /* this.dash.createLanguage(this.language).subscribe(
-      res=> {console.log(res)},
-      err=> {this.error = err.error.msg})*/
-
-    }
 
    addLanguage(i:number){
     this.language = {

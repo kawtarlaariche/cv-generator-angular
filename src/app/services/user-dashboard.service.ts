@@ -22,28 +22,28 @@ export class UserDashboardService {
   constructor(private http: HttpClient) { }
  
   updateUser(id:Number,user: User):Observable<any>{
-    return this.http.put(apiUrl + '/user/' +id, user,httpOptions).pipe(
+    return this.http.put(apiUrl + '/users/' +id, user,httpOptions).pipe(
       catchError(this.errorHandler));
   }
   
  createEducation(education:Education){
-   return this.http.post(apiUrl+'/education',education,httpOptions).pipe(
+   return this.http.post(apiUrl+'/educations',education,httpOptions).pipe(
     catchError(this.errorHandler));
  }
  createExperience(experience:Experience){
-  return this.http.post(apiUrl+'/experience',experience,httpOptions).pipe(
+  return this.http.post(apiUrl+'/experiences',experience,httpOptions).pipe(
    catchError(this.errorHandler));
 }
 createProject(project:Project){
-  return this.http.post(apiUrl+'/project',project,httpOptions).pipe(
+  return this.http.post(apiUrl+'/projects',project,httpOptions).pipe(
    catchError(this.errorHandler));
 }
 createLanguage(language:Language){
-  return this.http.post(apiUrl+'/language',language,httpOptions).pipe(
+  return this.http.post(apiUrl+'/languages',language,httpOptions).pipe(
    catchError(this.errorHandler));
 }
 createHobby(hobby:Hobby){
-  return this.http.post(apiUrl+'/hobby',hobby,httpOptions).pipe(
+  return this.http.post(apiUrl+'/hobbies',hobby,httpOptions).pipe(
    catchError(this.errorHandler));
 }
 

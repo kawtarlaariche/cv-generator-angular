@@ -3,7 +3,7 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import * as jsPDF from 'jspdf';
 import * as html2canvas from 'html2canvas';
 import { DataCvService } from '@app/services/data-cv.service';
-import { User } from '@app/models';
+import { User, Education, Experience, Project, Language, Hobby } from '@app/models';
 
 @Component({
   selector: 'app-cv1',
@@ -15,22 +15,66 @@ export class Cv1Component implements OnInit {
 
   user1 = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : undefined;
   user2: User;
-  zbel: string;
+  educations:Education[];
+  experiences:Experience[];
+  projects:Project[];
+  languages:Language[];
+  hobbies:Hobby[]
+  
   error;
 
   constructor(private dataCv: DataCvService) {
    
   }
-
+  
   getUser() {
     return this.dataCv.getUser(this.user1.id).subscribe(
       res => { this.user2 = res},
       err => { this.error = err.error.msg })
   }
 
+  getEducations(){
+    return this.dataCv.getEducationsByUserID(this.user1).subscribe(
+      res => { this.educations = res, console.log(res)},
+      err => { this.error = err.error.msg, console.log(err), console.log(this.user1) }
+    )
+  }
+
+  getExperiences(){
+    return this.dataCv.getExperiencesByUserID(this.user1).subscribe(
+      res => { this.experiences = res, console.log(res)},
+      err => { this.error = err.error.msg, console.log(err), console.log(this.user1) }
+    )
+  }
+  getProjects(){
+    return this.dataCv.getProjectsByUserID(this.user1).subscribe(
+      res => { this.projects = res, console.log(res)},
+      err => { this.error = err.error.msg, console.log(err), console.log(this.user1) }
+    )
+  }
+
+  getLanguages(){
+    return this.dataCv.getLanguagesByUserID(this.user1).subscribe(
+      res => { this.languages = res, console.log(res)},
+      err => { this.error = err.error.msg, console.log(err), console.log(this.user1) }
+    )
+  }
+
+  getHobbies(){
+    return this.dataCv.getHobbiesByUserID(this.user1).subscribe(
+      res => { this.hobbies = res, console.log(res)},
+      err => { this.error = err.error.msg, console.log(err), console.log(this.user1) }
+    )
+  }
 
   ngOnInit(): void {
-  this.getUser();
+    console.log(this.user1)
+    this.getUser();
+    this.getEducations();
+    this.getExperiences();
+    this.getProjects();
+    this.getLanguages();
+    this.getHobbies();
   }
 
   downloadPDF(): void {

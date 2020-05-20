@@ -12,9 +12,9 @@ import { Router } from '@angular/router';
 export class ExperienceComponent implements OnInit {
 
   error;
-  experience:Experience
+  experience: Experience
   user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : undefined;
-  ExperienceForm:FormGroup
+  ExperienceForm: FormGroup
   constructor(
     private fb: FormBuilder,
     private dash: UserDashboardService,
@@ -26,44 +26,37 @@ export class ExperienceComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  onSubmit() {
-    const creds = this.ExperienceForm.controls.credentials as FormArray;
-    this.experience={ 
-      dateDebut:creds.value[0].dateDebut,
-      dateFin:creds.value[0].dateFin,
-      description:creds.value[0].description,
-      users_id:this.user.id}
-      console.log(this.experience)
-      this.dash.createExperience(this.experience).subscribe(
-      res=> {console.log(res)},
-      err=> {this.error = err.error.msg})
-
-  }
-  get experiences():FormArray{
+ 
+  get experiences(): FormArray {
     return this.ExperienceForm.get('experiences') as FormArray
   }
   addExperience(i: number) {
-    this.experience= {
+    this.experience = {
       dateDebut: this.experiences.value[i].dateDebut,
       dateFin: this.experiences.value[i].dateFin,
-      description:this.experiences.value[i].description,
-      users_id: this.user.id}
-      console.log(this.experiences.value[i]);
+      company: this.experiences.value[0].company,
+      title: this.experiences.value[0].company,
+      description: this.experiences.value[i].description,
+      users_id: this.user.id
+    }
+    console.log(this.experiences.value[i]);
     this.dash.createExperience(this.experience).subscribe(
       res => { console.log(res) },
       err => { this.error = err.error.msg })
-    }
-  delete(i) {
-    this.experiences.removeAt(i) 
   }
-  reset(i){
+  delete(i) {
+    this.experiences.removeAt(i)
+  }
+  reset(i) {
     this.experiences.reset(i)
   }
   addCreds() {
     this.experiences.push(this.fb.group({
       dateDebut: '',
       dateFin: '',
-      description:''
+      company: '',
+      title: '',
+      description: ''
     }));
   }
 

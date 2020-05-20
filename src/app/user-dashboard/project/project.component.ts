@@ -26,23 +26,12 @@ export class ProjectComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  onSubmit() {
-    const creds = this.ProjectForm.controls.credentials as FormArray;
-    this.project={ 
-      dateDebut:creds.value[0].dateDebut,
-      dateFin:creds.value[0].dateFin,
-      description:creds.value[0].description,
-      users_id:this.user.id}
-      console.log(this.project)
-      this.dash.createProject(this.project).subscribe(
-      res=> {console.log(res)},
-      err=> {this.error = err.error.msg})
-
-  }
+  
   addProject(i: number) {
     this.project = {
       dateDebut: this.projects.value[i].dateDebut,
       dateFin: this.projects.value[i].dateFin,
+      link:this.projects.value[i].link,
       description:this.projects.value[i].description,
       users_id: this.user.id
     }
@@ -64,6 +53,7 @@ export class ProjectComponent implements OnInit {
     this.projects.push(this.fb.group({
       dateDebut: '',
       dateFin: '',
+      link:'',
       description:''
     }));
   }

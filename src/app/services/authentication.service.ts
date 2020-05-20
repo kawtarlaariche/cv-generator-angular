@@ -6,7 +6,7 @@ import { catchError, map } from 'rxjs/operators';
 import { User } from '@app/models';
 
 
-const apiUrl = environment.baseApi + '/user';
+const apiUrl = environment.baseApi + '/users';
 
 @Injectable({
   providedIn: 'root'
